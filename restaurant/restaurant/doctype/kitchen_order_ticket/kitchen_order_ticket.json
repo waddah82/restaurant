@@ -1,0 +1,123 @@
+{
+  "doctype": "DocType",
+  "name": "Kitchen Order Ticket",
+  "creation": "2025-09-02 21:58:11.066455",
+  "modified": "2025-09-16 01:30:50.795497",
+  "modified_by": "Administrator",
+  "owner": "Administrator",
+  "docstatus": 0,
+  "idx": 0,
+  "search_fields": "invoice, order_type, table_number, status",
+  "issingle": 0,
+  "is_virtual": 0,
+  "is_tree": 0,
+  "istable": 0,
+  "editable_grid": 0,
+  "track_changes": 0,
+  "module": "Restaurant",
+  "autoname": "KOT-.####",
+  "naming_rule": "Expression (old style)",
+  "title_field": "invoice",
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "read_only": 0,
+  "in_create": 0,
+  "allow_copy": 0,
+  "allow_rename": 0,
+  "allow_import": 0,
+  "hide_toolbar": 1,
+  "track_seen": 0,
+  "is_submittable": 1,
+  "show_name_in_global_search": 0,
+  "custom": 0,
+  "beta": 0,
+  "has_web_view": 0,
+  "allow_guest_to_view": 0,
+  "email_append_to": 0,
+  "show_title_field_in_link": 1,
+  "translated_doctype": 1,
+  "default_view": "Kanban",
+  "show_preview_popup": 1,
+  "fields": [
+    {
+      "fieldname": "invoice",
+      "label": "POS Invoice",
+      "fieldtype": "Link",
+      "options": "POS Invoice",
+      "reqd": 1
+    },
+    {
+      "fieldname": "order_type",
+      "label": "Order Type",
+      "fieldtype": "Select",
+      "options": "Dine-In\nTakeaway\nDelivery",
+      "reqd": 1
+    },
+    {
+      "fieldname": "table_number",
+      "label": "Table Number",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "قيد التحضير\nجاهز\nتم التسليم",
+      "default": "قيد التحضير",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "items",
+      "label": "Items",
+      "fieldtype": "Table",
+      "options": "Kitchen Order Ticket Items"
+    },
+    {
+      "fieldname": "items_summary",
+      "label": "items_summary",
+      "fieldtype": "Text",
+      "in_list_view": 1,
+      "in_preview": 1
+    },
+    {
+      "fieldname": "submitted",
+      "label": "submitted",
+      "fieldtype": "Check",
+      "read_only": 1,
+      "in_filter": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Kitchen Order Ticket",
+      "read_only": 1,
+      "print_hide": 1,
+      "no_copy": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "select": 1
+    }
+  ],
+  "states": [
+    {
+      "title": "قيد التحضير",
+      "color": "Orange"
+    },
+    {
+      "title": "جاهز",
+      "color": "Green"
+    },
+    {
+      "title": "تم التسليم",
+      "color": "Blue"
+    }
+  ]
+}

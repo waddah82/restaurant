@@ -1,0 +1,39 @@
+{
+  "doctype": "DocType",
+  "name": "POS Print Rule",
+  "module": "Restaurant",
+  "custom": 1,
+  "istable": 1,
+  "editable_grid": 1,
+  "fields": [
+    {
+      "fieldname": "silent_print_format",
+      "fieldtype": "Link",
+      "label": "Silent Print Format",
+      "options": "Silent Print Format",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "print_type",
+      "fieldtype": "Data",
+      "label": "Print Type",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "do_print",
+      "fieldtype": "Check",
+      "label": "Print",
+      "in_list_view": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0
+    }
+  ]
+}
+

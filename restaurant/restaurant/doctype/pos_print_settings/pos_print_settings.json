@@ -1,0 +1,43 @@
+{
+  "doctype": "DocType",
+  "name": "POS Print Settings",
+  "module": "Restaurant",
+  "custom": 1,
+  "istable": 0,
+  "editable_grid": 0,
+  "issingle": 1,
+  "fields": [
+    {
+      "fieldname": "print_method",
+      "fieldtype": "Select",
+      "label": "Print Method",
+      "options": "Automatic Before Submit\nButton Only"
+    },
+    {
+      "fieldname": "last_printed_invoice",
+      "fieldtype": "Data",
+      "label": "Last Printed Invoice"
+    },
+    {
+      "fieldname": "convert_cards_to_text",
+      "fieldtype": "Check",
+      "label": "convert_cards_to_text",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rules",
+      "fieldtype": "Table",
+      "label": "Rules",
+      "options": "POS Print Rule"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0
+    }
+  ]
+}

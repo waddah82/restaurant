@@ -1,0 +1,95 @@
+{
+ "doctype": "DocType",
+ "name": "Recipe Calculator",
+ "module": "Restaurant",
+ "custom": 0,
+ "istable": 0,
+ "editable_grid": 0,
+ "autoname": "field:cal_name",
+ "fields": [
+  {
+   "fieldname": "cal_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "default": "cost cal"
+  },
+  {
+    "fieldname": "column_break_000",
+    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selling_price_list",
+   "fieldtype": "Link",
+   "label": "Selling Price List",
+   "options": "Price List",
+   "default": "Standard Selling"
+  },
+  {
+    "fieldname": "column_break_00",
+    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "buying_price_list",
+   "fieldtype": "Link",
+   "label": "Buying Price List",
+   "options": "Price List",
+   "default": "Standard Buying"
+  },
+  {
+    "fieldname": "secb00",
+    "fieldtype": "Section Break",
+    "label": "Info"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Finished Items",
+   "options": "Recipe Calculator Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "raw_materials",
+   "fieldtype": "Table",
+   "label": "Raw Materials",
+   "options": "Recipe Calculator Raw Material"
+  },
+  {
+    "fieldname": "secb01",
+    "fieldtype": "Section Break",
+    "label": "Cost/profit"
+  },
+  {
+   "fieldname": "total_sales",
+   "fieldtype": "Currency",
+   "label": "Total Sales"
+  },
+  {
+    "fieldname": "column_break_01",
+    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost"
+  },
+  {
+    "fieldname": "column_break_02",
+    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "profit",
+   "fieldtype": "Currency",
+   "label": "Profit"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "track_changes": 1
+}
