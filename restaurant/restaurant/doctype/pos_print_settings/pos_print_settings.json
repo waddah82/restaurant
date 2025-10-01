@@ -11,7 +11,7 @@
       "fieldname": "print_method",
       "fieldtype": "Select",
       "label": "Print Method",
-      "options": "Automatic Before Submit\nButton Only"
+      "options": "Default\nAutomatic Before Submit\nButton Only"
     },
     {
       "fieldname": "last_printed_invoice",
