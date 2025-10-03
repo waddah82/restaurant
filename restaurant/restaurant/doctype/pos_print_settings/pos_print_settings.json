@@ -1,12 +1,21 @@
 {
   "doctype": "DocType",
+  "autoname": "field:pos_profile",
   "name": "POS Print Settings",
   "module": "Restaurant",
   "custom": 1,
   "istable": 0,
   "editable_grid": 0,
-  "issingle": 1,
   "fields": [
+    {
+      "fieldname": "pos_profile",
+      "fieldtype": "Link",
+      "in_standard_filter": 1,
+      "label": "POS Profile",
+      "options": "POS Profile",
+      "reqd": 1,
+      "unique": 1
+    },
     {
       "fieldname": "print_method",
       "fieldtype": "Select",
@@ -14,14 +23,15 @@
       "options": "Default\nAutomatic Before Submit\nButton Only"
     },
     {
-      "fieldname": "last_printed_invoice",
-      "fieldtype": "Data",
-      "label": "Last Printed Invoice"
-    },
-    {
       "fieldname": "convert_cards_to_text",
       "fieldtype": "Check",
-      "label": "convert_cards_to_text",
+      "label": "Show Cards as Buttons",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "disable_stock_check",
+      "fieldtype": "Check",
+      "label": "Disable Stock Availability Check",
       "in_list_view": 1
     },
     {
@@ -29,6 +39,11 @@
       "fieldtype": "Table",
       "label": "Rules",
       "options": "POS Print Rule"
+    },
+    {
+      "fieldname": "last_printed_invoice",
+      "fieldtype": "Data",
+      "label": "Last Printed Invoice"
     }
   ],
   "permissions": [
