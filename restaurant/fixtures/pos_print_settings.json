@@ -5,7 +5,7 @@
   "doctype": "POS Print Settings",
   "last_printed_invoice": null,
   "modified": "2025-09-28 02:18:42.614935",
-  "name": "POS Print Settings",
+  "name": "Default POS Print Settings",
   "print_method": "Button Only",
   "rules": [
    {
