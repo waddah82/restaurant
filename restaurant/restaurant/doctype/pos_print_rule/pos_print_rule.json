@@ -7,10 +7,10 @@
   "editable_grid": 1,
   "fields": [
     {
-      "fieldname": "silent_print_format",
+      "fieldname": "restaurant_print_format",
       "fieldtype": "Link",
-      "label": "Silent Print Format",
-      "options": "Silent Print Format",
+      "label": "Restaurant Print Format",
+      "options": "Restaurant Print Format",
       "in_list_view": 1
     },
     {
