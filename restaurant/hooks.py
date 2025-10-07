@@ -4,7 +4,7 @@ app_publisher = "waddah"
 app_description = "for restaurant"
 app_email = "wd@wd.wd"
 app_license = "mit"
-app_logo_url = "/assets/ury/Images/H-logo.jpg"
+app_logo_url = "/assets/restaurant/Images/H-logo.jpg"
 app_icon_title = "HATHEEM
 # required_apps = []
 #app_include_js = ["public/js/pos_invoice.js"]
@@ -17,7 +17,7 @@ app_include_js = [
 ]
 
 #web_include_js = "/assets/restaurant/js/silent_print.js"
-website_context = {"splash_image": "/assets/ury/Images/H-logo.jpg"}
+website_context = {"splash_image": "/assets/restaurant/Images/H-logo.jpg"}
 
 doc_events = {
     "POS Invoice": {
