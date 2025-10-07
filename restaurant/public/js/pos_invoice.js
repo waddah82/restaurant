@@ -172,7 +172,7 @@ var send2bridge1 = function(frm, rules) {
                 args: {
                     doctype: frm.doc.doctype,
                     name: frm.doc.name,
-                    silent_print_format: rule.restaurant_print_format,
+                    restaurant_print_format: rule.restaurant_print_format,
                     no_letterhead: 1,
                     _lang: "ar"
                 },
