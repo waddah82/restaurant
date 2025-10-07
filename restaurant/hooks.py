@@ -5,7 +5,7 @@ app_description = "for restaurant"
 app_email = "wd@wd.wd"
 app_license = "mit"
 app_logo_url = "/assets/restaurant/Images/H-logo.jpg"
-app_icon_title = "HATHEEM
+app_icon_title = "HATHEEM"
 # required_apps = []
 #app_include_js = ["public/js/pos_invoice.js"]
 # Includes in <head>
