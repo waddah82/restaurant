@@ -5,6 +5,7 @@ app_description = "for restaurant"
 app_email = "wd@wd.wd"
 app_license = "mit"
 app_logo_url = "/assets/restaurant/Images/H-logo.jpg"
+app_icon_title = "HATHEEM"
 # required_apps = []
 #app_include_js = ["public/js/pos_invoice.js"]
 # Includes in <head>
@@ -44,7 +45,7 @@ fixtures = [
     {
         "doctype": "Custom Field",
         "filters": [
-            ["name", "in", ["Work Order-custom_sales_invoice","POS Invoice-custom_order_type000", "POS Invoice-custom_table_number000"]]
+            ["name", "in", ["Work Order-custom_sales_invoice","POS Invoice-custom_order_type", "POS Invoice-custom_table_number","Price List-custom_restaurant_menu"]]
         ]
     },
     {
