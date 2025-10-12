@@ -20,13 +20,13 @@
    "fieldname": "invoice",
    "fieldtype": "Link",
    "label": "POS Invoice",
-   "options": "POS Invoice",
+   "options": "POS Invoice"
   },
   {
    "fieldname": "sales_order",
    "fieldtype": "Link",
    "label": "Sales Order",
-   "options": "Sales Order",
+   "options": "Sales Order"
   },
   {
    "fieldname": "order_type",
