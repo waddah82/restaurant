@@ -1,0 +1,47 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2025-09-02 22:16:05.153084",
+  "must_be_whole_number": 0,
+  "name": "غ",
+  "uom_name": "غ"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2025-09-02 22:16:37.804462",
+  "must_be_whole_number": 0,
+  "name": "مل",
+  "uom_name": "مل"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2025-09-02 22:43:07.998115",
+  "must_be_whole_number": 0,
+  "name": "كغ",
+  "uom_name": "كغ"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2025-09-02 22:17:00.854896",
+  "must_be_whole_number": 0,
+  "name": "قطعة",
+  "uom_name": "قطعة"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "UOM",
+  "enabled": 1,
+  "modified": "2025-09-02 22:15:31.793151",
+  "must_be_whole_number": 0,
+  "name": "طبق",
+  "uom_name": "طبق"
+ }
+]
