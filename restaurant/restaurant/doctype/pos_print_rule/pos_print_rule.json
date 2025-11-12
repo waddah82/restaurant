@@ -20,6 +20,13 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "item_group",
+      "fieldtype": "Link",
+      "label": "Item Group",
+      "options": "Item Group",
+      "in_list_view": 1
+    },
+    {
       "fieldname": "do_print",
       "fieldtype": "Check",
       "label": "Print",
