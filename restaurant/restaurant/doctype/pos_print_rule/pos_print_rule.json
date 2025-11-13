@@ -27,6 +27,18 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "btitle",
+      "fieldtype": "Data",
+      "label": "Bill Title",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "print_price",
+      "fieldtype": "Check",
+      "label": "Print Price",
+      "in_list_view": 1
+    },
+    {
       "fieldname": "do_print",
       "fieldtype": "Check",
       "label": "Print",
