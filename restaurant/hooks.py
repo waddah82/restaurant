@@ -14,7 +14,8 @@ app_icon_title = "HATHEEM"
 app_include_js = [
 	"/assets/restaurant/js/pos_invoice.js",
  	"/assets/restaurant/js/silent_print.js",
- 	"/assets/restaurant/js/ui_setting.js"
+ 	"/assets/restaurant/js/ui_setting.js",
+ 	"/assets/restaurant/js/layout.js"
 ]
 
 #web_include_js = "/assets/restaurant/js/silent_print.js"
