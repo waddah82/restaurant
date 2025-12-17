@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+(function loadFA() {
+    if (document.getElementById("fa-6")) return;
+
+    const fa = document.createElement("link");
+    fa.id = "fa-6";
+    fa.rel = "stylesheet";
+    fa.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
+    document.head.appendChild(fa);
+})();
+
     if (window.__CUSTOM_SIDEBAR_LOADED__) {
         console.warn("Sidebar already loaded, skipping injection.");
         return;
@@ -29,11 +39,11 @@ document.addEventListener("click", (e) => {
     const floatBtn = document.getElementById("floating-sidebar-btn");
     if (!sidebar) return;
 
-    // ÅĞÇ sidebar ãİÊæÍ æáíÓÊ collapsed
+    
     if (!sidebar.classList.contains("collapsed")) {
-        // ÅĞÇ ÇáäŞÑ ÎÇÑÌ sidebar æ áíÓ Úáì ÇáÒÑ ÇáÚÇÆã
+       
         if (!sidebar.contains(e.target) && (!floatBtn || !floatBtn.contains(e.target))) {
-            toggleSidebar(); // íÛáŞ sidebar
+            toggleSidebar(); 
         }
     }
 });
@@ -43,665 +53,10 @@ function openSidebar() {
     const sidebar = document.getElementById("custom-sidebar");
     if (!sidebar) return;
     sidebar.classList.toggle("collapsed");
-    //sidebar.classList.remove("collapsed");  // íİÊÍ ÇáÓÇíÏÈÇÑ
+ 
 }
 
-// ==== CSS ãÏãÌ ====
-function injectCustomC() {
-    if (document.getElementById("custom-style")) return;
 
-    const style = document.createElement("style");
-    style.id = "custom-style";
-    style.innerHTML = `
-    /* ==== Custom Sidebar & Layout ==== */
-    body.custom-loaded {
-        display: flex;
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-    }
-
-    .custom-sidebar {
-        width: 320px;
-        background: #1f2937;
-        color: #f9fafb;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 1000;
-        transition: width 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    }
-
-    .sidebar-header {
-        padding: 20px;
-        text-align: center;
-        border-bottom: 1px solid #374151;
-        background: #111827;
-        flex-shrink: 0;
-    }
-
-    .sidebar-header h3 {
-        margin: 0;
-        color: #fbbf24;
-    }
-
-    .custom-sidebar .sidebar-toggle {
-        padding: 15px;
-        cursor: pointer;
-        display: flex;
-        justify-content: flex-end;
-        border-bottom: 1px solid #374151;
-        background: #111827;
-        flex-shrink: 0;
-    }
-
-    .custom-sidebar .user-section {
-        padding: 15px 20px;
-        border-bottom: 1px solid #374151;
-        background: #111827;
-        flex-shrink: 0;
-    }
-
-    .custom-sidebar .user-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 500;
-    }
-
-    .custom-sidebar .toggle-btn {
-        position: absolute;
-        top: 20px;
-        right: -15px;
-        background: #1f2937;
-        color: #D4AF37;
-        border: 2px solid #374151;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        transition: all 0.3s;
-        z-index: 1001;
-    }
-
-    .custom-sidebar .toggle-btn:hover {
-        transform: scale(1.1);
-        background: #374151;
-        color: #f1cc5b;
-    }
-
-    .modules-container {
-        flex: 1;
-        overflow-y: auto;
-        padding: 10px;
-        min-height: 0; /* ãåã ááÜ flexbox scrolling */
-    }
-
-    /* Module Styles */
-    .module-item {
-        margin-bottom: 8px;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .module-header {
-        padding: 12px 15px;
-        background: #374151;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 600;
-        transition: background 0.3s;
-    }
-
-    .module-header:hover {
-        background: #4b5563;
-    }
-
-    .menu-text {
-        flex: 1;
-    }
-
-    .dropdown-icon {
-        margin-left: auto;
-        transition: transform 0.3s;
-    }
-
-    .module-content.active .dropdown-icon {
-        transform: rotate(180deg);
-    }
-
-    .module-content {
-        background: #111827;
-        display: none;
-    }
-
-    .module-content.active {
-        display: block;
-    }
-
-    /* Workspace Styles */
-    .workspace-item {
-        border-bottom: 1px solid #2d3748;
-    }
-
-    .workspace-header {
-        padding: 10px 15px 10px 25px;
-        background: #2d3748;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: background 0.3s;
-    }
-
-    .workspace-header:hover {
-        background: #374151;
-    }
-
-    .workspace-dropdown {
-        margin-left: auto;
-        transition: transform 0.3s;
-    }
-
-    .workspace-content.active .workspace-dropdown {
-        transform: rotate(180deg);
-    }
-
-    .workspace-content {
-        background: #1a202c;
-        display: none;
-    }
-
-    .workspace-content.active {
-        display: block;
-    }
-
-    /* Card Styles */
-    .card-item {
-        border-bottom: 1px solid #2d3748;
-    }
-
-    .card-header {
-        padding: 8px 15px 8px 35px;
-        background: #2d3748;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        transition: background 0.3s;
-    }
-
-    .card-header:hover {
-        background: #374151;
-    }
-
-    .card-title {
-        flex: 1;
-    }
-
-    .card-dropdown {
-        margin-left: auto;
-        transition: transform 0.3s;
-    }
-
-    .card-content.active .card-dropdown {
-        transform: rotate(180deg);
-    }
-
-    .card-content {
-        background: #1a202c;
-        display: none;
-    }
-
-    .card-content.active {
-        display: block;
-    }
-
-    /* Link Styles */
-    .link-item {
-        padding: 6px 15px 6px 45px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition: background 0.3s;
-        border-bottom: 1px solid #2d3748;
-        font-size: 13px;
-    }
-
-    .link-item:hover {
-        background: #2d3748;
-    }
-
-    .link-item:last-child {
-        border-bottom: none;
-    }
-
-    .link-item i {
-        width: 16px;
-        text-align: center;
-        color: #9ca3af;
-    }
-
-    /* Main Content */
-    .main-content {
-        margin-left: 340px;
-        padding: 20px;
-        background: #f3f4f6;
-        height: 100vh;
-        overflow-y: auto;
-        transition: margin-left 0.3s ease;
-        width: calc(100% - 340px);
-        flex: 1;
-    }
-
-    .custom-sidebar.collapsed + .main-content {
-        margin-left: 80px;
-        width: calc(100% - 80px);
-    }
-
-    /* States */
-    .loading, .error, .empty {
-        padding: 20px;
-        text-align: center;
-        color: #9ca3af;
-    }
-
-    .error {
-        color: #ef4444;
-    }
-
-    .empty {
-        color: #6b7280;
-    }
-
-    .no-workspaces, .no-cards, .no-links {
-        padding: 15px 20px;
-        color: #6b7280;
-        font-style: italic;
-        text-align: center;
-    }
-
-    /* Icons */
-    .es-icon {
-        width: 16px;
-        height: 16px;
-        fill: currentColor;
-    }
-
-    .icon-sm {
-        width: 14px;
-        height: 14px;
-    }
-
-    .icon-xs {
-        width: 12px;
-        height: 12px;
-    }
-
-    /* Scrollbar ãÍÓä */
-    .modules-container::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .modules-container::-webkit-scrollbar-track {
-        background: #1f2937;
-        border-radius: 3px;
-    }
-
-    .modules-container::-webkit-scrollbar-thumb {
-        background: #4b5563;
-        border-radius: 3px;
-    }
-
-    .modules-container::-webkit-scrollbar-thumb:hover {
-        background: #6b7280;
-    }
-
-    /* Scrollbar ááãÍÊæì ÇáÑÆíÓí */
-    .main-content::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    .main-content::-webkit-scrollbar-track {
-        background: #f1f5f9;
-        border-radius: 4px;
-    }
-
-    .main-content::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 4px;
-    }
-
-    .main-content::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
-
-    /* Responsive */
-    @media (max-height: 600px) {
-        .modules-container {
-            padding: 5px;
-        }
-        
-        .module-header {
-            padding: 8px 12px;
-        }
-        
-        .workspace-header {
-            padding: 8px 12px 8px 20px;
-        }
-        
-        .card-header {
-            padding: 6px 12px 6px 25px;
-        }
-        
-        .link-item {
-            padding: 4px 12px 4px 35px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .custom-sidebar {
-            width: 100%;
-            transform: translateX(-100%);
-        }
-        
-        .custom-sidebar.active {
-            transform: translateX(0);
-        }
-        
-        .main-content {
-            margin-left: 0;
-            width: 100%;
-        }
-    }
-    .floating-sidebar-btn {
-        position: fixed;
-        top: 35px;
-        left: 2px; /* ÇİÊÑÇÖí ááíÓÇÑ */
-        width: 30px;
-        height: 30px;
-        background: #4b4b4b;
-        color: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 99999;
-        font-size: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    }
-    
-    /* ÚäÏ ÇááÛÉ ÇáÚÑÈíÉ — íäŞá ÇáÒÑ ááíÓÇÑ */
-    body.rtl-mode .floating-sidebar-btn {
-        right: 25px;
-        
-    }
-    
-    .floating-sidebar-btn:hover {
-        background: #333;
-    }
-    
-    /* ÇáæÖÚ ÇáÚÇÏí (ÇáÅäÌáíÒí) */
-    .custom-sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 260px;
-        height: 100vh;
-        transform: translateX(0);
-        transition: all 0.3s ease;
-        direction: ltr;
-    }
-    
-    /* ÚäÏ ÅÛáÇŞ ÇáÓÇíÏÈÇÑ */
-    .custom-sidebar.closed {
-        transform: translateX(-260px);
-    }
-    
-    /* RTL ÚäÏ áÛÉ ÚÑÈíÉ */
-    body.rtl-mode .custom-sidebar {
-        right: 0;
-        left: auto;
-        direction: rtl;
-        text-align: right;
-    }
-    
-    /* RTL ÚäÏ ÇáÅÛáÇŞ */
-    body.rtl-mode .custom-sidebar.closed {
-        transform: translateX(260px);
-    }
-    
-    /* ÒÑ ÇáÊßãÔÉ (toggle-btn) */
-    .toggle-btn {
-        position: absolute;
-        top: 10px;
-        right: -25px;
-        cursor: pointer;
-    }
-    
-    /* RTL — äŞá ÒÑ ÇáÊßãÔÉ ááÌåÉ ÇáÃÎÑì */
-    body.rtl-mode .toggle-btn {
-        left: -25px;
-        right: auto;
-    }
-    
-    /* ÃíŞæäÉ ÇáåÇãÈÑÛÑ */
-    #sidebar-toggle {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
-    
-    /* RTL — äŞá ÃíŞæäÉ ÇáåÇãÈÑÛÑ */
-    body.rtl-mode #sidebar-toggle {
-        right: 10px;
-        left: -20px;
-        display: flex;
-        justify-content: flex-end;
-        padding: 8px;
-        cursor: pointer;
-        position: sticky;
-        top: 50px;
-        z-index: 1001;
-        background: blue;
-    }
-    
-    .menu-text {
-        flex: 1;
-        margin: 10 !important;
-        font-size: 15px !important;
-        font-weight: 600;
-        color: white;
-    }
-    .standard-sidebar,
-    .desk-sidebar,
-    .search-dialog .search-results .search-sidebar {
-        display: none !important;
-        width: 0 !important;
-        max-width: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        border: 0 !important;
-    }
-    
-    .dropdown-container {
-        margin-bottom: 8px;
-        width: 100%;
-    }
-    .custom-sidebar .sidebar-toggle {
-        display: flex;
-        justify-content: flex-end;
-        padding: 2px;
-        cursor: pointer;
-        position: sticky;
-        top: 50px;
-        z-index: 1001;
-        background: blue;
-    }
-    
-    .custom-sidebar.collapsed {
-        width: 10px;
-    }
-    
-    .module-item .module-header,
-    .workspace-item .workspace-header,
-    .card-item .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 8px 12px;
-        cursor: pointer;
-        border-radius: 1px;
-        transition: background 0.2s;
-    }
-    .module-item .module-header {
-        display: flex;
-        font-family: 'wad7';
-        font-size: 19px;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 10px;
-        padding-right: 3px;
-        padding-bottom: 10px;
-        padding-left: 3px;
-        cursor: pointer;
-        cursor: pointer;
-        border-radius: 1px;
-        transition: background 0.2s;
-        background:  var(--blue-primary);
-        
-        
-    }
-    .workspace-item .workspace-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 8px 12px;
-        cursor: pointer;
-        background:  var(--blue-secondary);
-    }
-    .card-title {
-        display: flex;
-        padding-left: 22px !important;
-        text-align: center;
-        align-items: center;
-        
-    }
-    .card-item .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-left: 22px !important;
-        padding-right: 22px !important;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 1px;
-        transition: background 0.2s;
-    }
-    /* --------------------------- */
-    /* --- ÕİÍÇÊ ÊÓÌíá ÇáÏÎæá --- */
-    /* --------------------------- */
-    /* ==== Custom Sidebar & Layout ==== */
-    .container,
-    .container-sm,
-    .container-md,
-    .container-lg,
-    .container-xl,
-    .container-xxl,
-    .page-container,
-    .layout-main-section {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-    }
-    
-    /* ÌÚá ÍŞæá ÇáäãæĞÌ ããÊÏÉ */
-    .form-layout,
-    .form-section,
-    .section-body,
-    .layout-main {
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-    
-    
-    
-    
-    /*.layout-side-section,*/
-    
-    /* --------------------------- */
-    /* --- ÕİÍÇÊ ÊÓÌíá ÇáÏÎæá --- */
-    /* --------------------------- */
-    /* ==== Custom Sidebar & Layout ==== */
-    .container,
-    .container-sm,
-    .container-md,
-    .container-lg,
-    .container-xl,
-    .container-xxl,
-    .page-container,
-    .layout-main-section {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-    }
-    
-    /* ÌÚá ÍŞæá ÇáäãæĞÌ ããÊÏÉ */
-    .form-layout,
-    .form-section,
-    .section-body,
-    .layout-main {
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-    
-    /* ÊæÓíÚ ãäØŞÉ ÇáãÍÊæì */
-    .page-body,
-    #page-content,
-    .main-section {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    /* ÍÊì ÏÇÎá ÇáÜ Dialog */
-    .modal-dialog {
-        max-width: 90% !important;
-    }
-    
-    /* ÊæÓíÚ ÇáÜ Grid İí Child Tables */
-    .grid-form,
-    .grid-body {
-        max-width: 100% !important;
-    }
-    
-    /* ÅáÛÇÁ ÇáåæÇãÔ ÇáÇİÊÑÇÖíÉ */
-    .container {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-    body.custom-loaded {
-        display: flex;
-        margin: 0;
-        
-    }
-    `;
-    document.head.appendChild(style);
-}
 
 function injectCustomCSS() {
     if (document.getElementById("custom-style")) return;
@@ -728,7 +83,7 @@ function injectCustomCSS() {
         width: 260px;
         height: 100vh;
         background: #1f2937;
-        color: #f9fafb;
+        color: #BA9F63;
         overflow: hidden;
         z-index: 1000;
         display: flex;
@@ -872,7 +227,7 @@ function injectCustomCSS() {
     }
 
     .module-item .module-header:hover {
-        background: #4b5563;
+        background: #153351;
     }
 
     .menu-text {
@@ -983,7 +338,7 @@ function injectCustomCSS() {
         display: block;
     }
 
-    .link-item {
+    .clink-item {
         padding: 6px 15px 6px 45px;
         cursor: pointer;
         display: flex;
@@ -994,15 +349,15 @@ function injectCustomCSS() {
         font-size: 13px;
     }
 
-    .link-item:hover {
+    .clink-item:hover {
         background: #2d3748;
     }
 
-    .link-item:last-child {
+    .clink-item:last-child {
         border-bottom: none;
     }
 
-    .link-item i {
+    .clink-item i {
         width: 16px;
         text-align: center;
         color: #9ca3af;
@@ -1096,7 +451,7 @@ function injectCustomCSS() {
             padding: 6px 12px 6px 25px;
         }
         
-        .link-item {
+        .clink-item {
             padding: 4px 12px 4px 35px;
         }
     }
@@ -1202,11 +557,312 @@ function injectCustomCSS() {
         margin: 0 !important;
         border: 0 !important;
     }
+    /* =================== PROFESSIONAL UI POLISH =================== */
+
+/* Sidebar background with depth */
+.custom-sidebar {
+    background: linear-gradient(
+        180deg,
+        #153351 0%,
+        #0f2a44 100%
+    );
+}
+
+/* Modules â€“ strong & clear */
+.module-header {
+    background: rgba(255,255,255,0.08);
+    border-left: 4px solid transparent;
+}
+
+.module-header:hover {
+    background: rgba(255,255,255,0.14);
+    border-left-color: #BA9F63;
+}
+
+/* Active module */
+.module-content.active + .module-header,
+.module-header.active {
+    border-left-color: #BA9F63;
+}
+
+/* Workspace â€“ lighter */
+.workspace-header {
+    background: rgba(255,255,255,0.05);
+}
+
+.workspace-header:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Card â€“ very subtle */
+.card-header {
+    background: rgba(255,255,255,0.04);
+}
+
+.card-header:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* Links â€“ action feeling */
+.clink-item {
+    color: #DAE1E3;
+}
+
+.clink-item:hover {
+    background: rgba(186,159,99,0.25);
+    color: #ffffff;
+}
+
+/* Icons color harmony */
+.module-header i,
+.workspace-header i,
+.clink-item i {
+    color: #BA9F63;
+}
+
+/* Dropdown arrows */
+.dropdown-icon,
+.workspace-dropdown,
+.card-dropdown {
+    opacity: 0.7;
+}
+
+.module-header:hover .dropdown-icon,
+.workspace-header:hover .workspace-dropdown,
+.card-header:hover .card-dropdown {
+    opacity: 1;
+}
+
+/* Smooth feel */
+.module-header,
+.workspace-header,
+.card-header,
+.clink-item {
+    transition: all 0.2s ease;
+}
+
+/* Sidebar shadow â€“ depth */
+.custom-sidebar {
+    box-shadow: 6px 0 24px rgba(0,0,0,0.35);
+}
+/* ================= CLEAN ENTERPRISE SIDEBAR ================= */
+
+/* Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ø¥Ø­Ø³Ø§Ø³ Ø¨Ø§Ù„ÙƒØ±ÙˆØª */
+.module-item,
+.workspace-item,
+.card-item {
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Ø¥Ø²Ø§Ù„Ø© Ø£ÙŠ borders Ø«Ù‚ÙŠÙ„Ø© */
+.module-header,
+.workspace-header,
+.card-header {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Hover Ù†Ø§Ø¹Ù… Ø¨Ø¯ÙˆÙ† Ù…Ø±Ø¨Ø¹Ø§Øª */
+.module-header:hover,
+.workspace-header:hover,
+.card-header:hover {
+    background: rgba(186,159,99,0.12) !important;
+}
+
+/* Active state Ø§Ø­ØªØ±Ø§ÙÙŠ (Ø®Ø· Ø°Ù‡Ø¨ÙŠ Ø±ÙÙŠØ¹ ÙÙ‚Ø·) */
+.module-content.active > .workspace-item:first-child,
+.module-header.active {
+    box-shadow: inset 3px 0 0 #BA9F63;
+}
+
+/* Links â€“ Ø¨Ø¯ÙˆÙ† ØµÙ†Ø§Ø¯ÙŠÙ‚ */
+.clink-item {
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+
+.clink-item:hover {
+    background: rgba(186,159,99,0.18) !important;
+}
+
+/* Ø¥Ø²Ø§Ù„Ø© Ø£ÙŠ outline Ø£Ø¨ÙŠØ¶ Ù…Ù† Ø§Ù„Ù…ØªØµÙØ­ */
+.module-header:focus,
+.workspace-header:focus,
+.card-header:focus,
+.clink-item:focus {
+    outline: none !important;
+}
+
+/* ØªØ­Ø³ÙŠÙ† Ø§Ù„Ø¥Ø­Ø³Ø§Ø³ Ø§Ù„Ø¹Ø§Ù… */
+.module-header,
+.workspace-header,
+.card-header,
+.clink-item {
+    transition: background-color 0.18s ease,
+                color 0.18s ease;
+}
+
+/* Ø£ÙŠ SVG Ø£Ùˆ icon Ù„Ø§ ÙŠØ¹Ø·ÙŠ Ø¥Ø·Ø§Ø± */
+svg,
+i {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+    /* Ù…Ø³Ø§ÙØ© Ø¨ÙŠÙ† Ø§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø© ÙˆØ§Ù„Ù†Øµ â€“ Ø­Ù„ Ø¹Ø§Ù… */
+.module-header,
+.workspace-header,
+.card-header,
+.clink-item,
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* â† Ø¹Ø¯Ù‘Ù„ Ø§Ù„Ø±Ù‚Ù… Ø­Ø³Ø¨ Ø°ÙˆÙ‚Ùƒ */
+}
+/* ================= FINAL ENTERPRISE DESIGN ================= */
+
+/* Ø¥Ø²Ø§Ù„Ø© Ø£ÙŠ Ø¥Ø­Ø³Ø§Ø³ Ù…Ø±Ø¨Ø¹Ø§Øª Ù†Ù‡Ø§Ø¦ÙŠÙ‹Ø§ */
+.module-item,
+.workspace-item,
+.card-item {
+    background: transparent !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+/* Ø§Ù„Ø¹Ù†Ø§ÙˆÙŠÙ† Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ© */
+.module-header,
+.workspace-header,
+.card-header,
+.clink-item {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: relative;
+}
+
+/* Hover Ù†Ø§Ø¹Ù… Ø¬Ø¯Ù‹Ø§ (Ø¨Ø¯ÙˆÙ† Ø£Ø¨ÙŠØ¶) */
+.module-header:hover,
+.workspace-header:hover,
+.card-header:hover,
+.clink-item:hover {
+    background: rgba(21, 51, 81, 0.35) !important; /* Ø£Ø²Ø±Ù‚ Ø¯Ø§ÙƒÙ† Ø´ÙØ§Ù */
+}
+
+/* Ø´Ø±ÙŠØ· Ø°Ù‡Ø¨ÙŠ Ø§Ø­ØªØ±Ø§ÙÙŠ Ø¹Ù†Ø¯ Ø§Ù„ØªØ­ÙˆÙŠÙ… */
+.module-header::before,
+.workspace-header::before,
+.card-header::before,
+.clink-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: #BA9F63;
+    opacity: 0.9;
+    transition: width 0.18s ease;
+}
+
+.module-header:hover::before,
+.workspace-header:hover::before,
+.card-header:hover::before,
+.clink-item:hover::before {
+    width: 3px;
+}
+
+/* Active state (Ø«Ø§Ø¨Øª ÙˆÙ‡Ø§Ø¯Ø¦) */
+.module-content.active + .module-header::before,
+.module-header.active::before {
+    width: 3px;
+}
+
+/* Ø§Ù„Ù†Øµ */
+.menu-text,
+.card-title,
+.clink-item span {
+    color: #DAE1E3;
+    font-weight: 500;
+}
+
+/* Ø§Ù„Ø£ÙŠÙ‚ÙˆÙ†Ø§Øª */
+.module-header i,
+.workspace-header i,
+.card-header i,
+.clink-item i {
+    color: #BA9F63;
+    opacity: 0.85;
+}
+
+/* Ø¨Ø¯ÙˆÙ† Ø£ÙŠ outline Ù…Ù† Ø§Ù„Ù…ØªØµÙØ­ */
+*:focus,
+*:focus-visible,
+*:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ø­Ø±ÙƒØ© Ø®ÙÙŠÙØ© Ø¬Ø¯Ù‹Ø§ Ø¹Ù†Ø¯ hover */
+.module-header:hover,
+.workspace-header:hover,
+.card-header:hover,
+.clink-item:hover {
+    transform: translateX(2px);
+}
+
+/* Ø§Ù†ØªÙ‚Ø§Ù„Ø§Øª Ù†Ø§Ø¹Ù…Ø© */
+.module-header,
+.workspace-header,
+.card-header,
+.clink-item {
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+/* ================= CLEAN MODERN SCROLLBAR ================= */
+
+/* Firefox */
+.modules-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(186,159,99,0.6) transparent;
+}
+
+/* Chrome / Edge / Safari */
+.modules-container::-webkit-scrollbar {
+    width: 4px;               /* Ù†Ø­ÙŠÙ Ø¬Ø¯Ù‹Ø§ */
+}
+
+.modules-container::-webkit-scrollbar-track {
+    background: transparent;  /* Ø¨Ø¯ÙˆÙ† Ù…Ø³Ø§Ø± */
+}
+
+.modules-container::-webkit-scrollbar-thumb {
+    background: rgba(186,159,99,0.55); /* Ø°Ù‡Ø¨ÙŠ Ø´ÙØ§Ù */
+    border-radius: 10px;
+}
+
+/* ÙŠØ¸Ù‡Ø± ÙÙ‚Ø· Ø¹Ù†Ø¯ Ø§Ù„ØªÙ…Ø±ÙŠØ± */
+.modules-container:not(:hover)::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+/* Ø¹Ù†Ø¯ hover */
+.modules-container:hover::-webkit-scrollbar-thumb {
+    background: rgba(186,159,99,0.8);
+}
+
+/* ÙŠÙ…Ù†Ø¹ Ø£ÙŠ Ø¥Ø·Ø§Ø± ØºØ¨ÙŠ */
+.modules-container::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}
+
+    
     `;
     document.head.appendChild(style);
 }
 
-// ==== ÅÒÇáÉ sidebar ÇáäÙÇã ====
 function replaceERPNextSidebar() {
     const oldSidebar = document.querySelector(".layout-side-section");
     if (oldSidebar) {
@@ -1214,7 +870,6 @@ function replaceERPNextSidebar() {
     }
 }
 
-// ==== Inject everything ====
 function injectEverything() {
     injectCustomSidebar();
     document.body.classList.add("custom-loaded");
@@ -1222,18 +877,15 @@ function injectEverything() {
     loadWorkspaces();
 }
 
-// ==== Sidebar HTML ãÏãÌ ====
 function injectCustomSidebar11() {
     if (document.querySelector(".custom-sidebar")) return;
 
     const sidebarHTML = `
     <div class="custom-sidebar" id="custom-sidebar">
         <div class="sidebar-header">
-            <h3>?? áæÍÉ ÇáÊØÈíŞÇÊ</h3>
+            <h3>?? ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h3>
         </div>
-        <div class="sidebar-toggle" id="sidebar-toggle">
-            <i class="fa-solid fa-bars"></i>
-        </div>
+        
         <button class="toggle-btn" onclick="toggleSidebar()">
             <i class="fa-solid fa-angles-left"></i>
         </button>
@@ -1241,21 +893,20 @@ function injectCustomSidebar11() {
         <div class="user-section">
             <div class="user-info">
                 <i class="fa-solid fa-user"></i>
-                <span id="currentUser">ÌÇÑí ÇáÊÍãíá...</span>
+                <span id="currentUser">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...</span>
             </div>
         </div>
 
         <div class="modules-container" id="modules-container">
-            <div class="loading">? ÌÇÑí ÊÍãíá ÇáÈíÇäÇÊ...</div>
+            <div class="loading">? ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...</div>
         </div>
     </div>
     
     <div class="main-content">
-        <!-- ÇáãÍÊæì ÇáÃÕáí -->
+        <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -->
     </div>
     `;
     
-    // äŞá ÇáãÍÊæì ÇáÃÕáí Åáì main-content
     const pageContent = document.querySelector('.layout-main-section') || document.querySelector('.page-content');
     const mainContent = document.createElement('div');
     mainContent.className = 'main-content';
@@ -1264,7 +915,7 @@ function injectCustomSidebar11() {
         document.body.insertBefore(mainContent, pageContent);
         mainContent.appendChild(pageContent);
     } else {
-        document.body.insertAdjacentHTML('beforeend', '<div class="main-content"><div style="padding: 20px;">ãÍÊæì ÇáÊØÈíŞ</div></div>');
+        document.body.insertAdjacentHTML('beforeend', '<div class="main-content"><div style="padding: 20px;">ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</div></div>');
     }
     
     document.body.insertAdjacentHTML("afterbegin", sidebarHTML);
@@ -1274,10 +925,8 @@ function injectCustomSidebar() {
     if (document.querySelector(".custom-sidebar")) return;
 
     const sidebarHTML = `
-    <div class="custom-sidebar" id="custom-sidebar">
-        <div class="sidebar-toggle" id="sidebar-toggle">
-            <i class="fa-solid fa-bars"></i>
-        </div>
+    <div class="custom-sidebar collapsed" id="custom-sidebar">
+     
         <div class="toggle-btn" onclick="toggleSidebar()">
             <i class="fa-solid fa-angles-left"></i>
         </div>
@@ -1294,7 +943,7 @@ function injectCustomSidebar() {
         </ul>
     </div>
     <div class="floating-sidebar-btn" id="floating-sidebar-btn">
-        <i class="fa-solid fa-bars"></i>
+        â˜°
     </div>
     `;
     document.body.insertAdjacentHTML("afterbegin", sidebarHTML);
@@ -1313,7 +962,6 @@ function toggleSidebar() {
     }
 }
 
-// ==== ÅÚÏÇÏ ÒÑ collapse ====
 function setupSidebarToggle() {
     const btn = document.getElementById("sidebar-toggle");
     const sidebar = document.getElementById("custom-sidebar");
@@ -1326,18 +974,17 @@ function setupSidebarToggle() {
     }
 }
 
-// ==== ÊÍãíá ÇáÈíÇäÇÊ ãä ÇáÈÇíËæä ====
 function loadWorkspaces() {
-    console.log('?? ÈÏÁ ÊÍãíá ÇáÈíÇäÇÊ...');
+    console.log('?? ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...');
     
     frappe.call({
-        method: 'restaurant.my_custom_script.get_modules_with_workspaces',
+        method: 'my_custom_app.my_custom_script.get_modules_with_workspaces',
         callback: function(response) {
-            console.log('?? ÇÓÊÌÇÈÉ API:', response);
+            console.log('?? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ API:', response);
             
             if (response.message && Array.isArray(response.message)) {
                 if (response.message.length > 0) {
-                    console.log(`? Êã ÊÍãíá ${response.message.length} æÍÏÉ`);
+                    console.log(`? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ${response.message.length} ï¿½ï¿½ï¿½ï¿½`);
                     renderRealWorkspacesStructure(response.message);
                 } else {
                     showEmptyState();
@@ -1345,17 +992,16 @@ function loadWorkspaces() {
             } else if (response.message && response.message.error) {
                 showErrorState(response.message.error);
             } else {
-                showErrorState('ÑÏ ÛíÑ ãÚÑæİ ãä ÇáÎÇÏã');
+                showErrorState('ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
             }
         },
         error: function(err) {
-            console.error('? ÎØÃ İí ÇÓÊÏÚÇÁ API:', err);
-            showErrorState('İÔá İí ÇáÇÊÕÇá ÈÇáÎÇÏã');
+            console.error('? ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ API:', err);
+            showErrorState('ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
         }
     });
 }
 
-// ==== ÚÑÖ ÇáÈíÇäÇÊ ÈäãØ ÇáÜ Workspaces ====
 function renderRealWorkspacesStructure(workspaces) {
     const container = document.getElementById('modules-container');
     if (!container) return;
@@ -1430,7 +1076,7 @@ function renderLinksStructure(card) {
     }
     let html = '';
     card.links.forEach(link => {
-        html += `<div class="link-item" onclick="navigateTo('${link.href}')">
+        html += `<div class="clink-item" onclick="navigateTo('${link.href}')">
             <i class="${link.icon||'fa-solid fa-link'}"></i>
             <span>${link.title}</span>
         </div>`;
@@ -1438,13 +1084,13 @@ function renderLinksStructure(card) {
     return html;
 }
 
-// ==== æÙÇÆİ ÇáÊÈÏíá ====
+
 window.toggleModule = function(moduleName) {
     const content = document.getElementById(`module-${moduleName}`);
     const icon = event.currentTarget.querySelector('.dropdown-icon use');
     
     if (content) {
-        // ÅÛáÇŞ ÌãíÚ ÇáÜ modules ÇáÃÎÑì
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ modules ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         document.querySelectorAll('.module-content').forEach(item => {
             if (item.id !== `module-${moduleName}`) {
                 item.classList.remove('active');
@@ -1498,9 +1144,9 @@ window.toggleCard = function(cardId) {
     }
 }
 
-// ==== ÇáÊäŞá ====
+// ==== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ====
 window.navigateTo = function(path) {
-    console.log("?? ÇáÇäÊŞÇá Åáì:", path);
+    console.log("?? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½:", path);
     if (typeof frappe !== 'undefined' && frappe.set_route) {
         frappe.set_route(path);
     } else {
@@ -1508,15 +1154,15 @@ window.navigateTo = function(path) {
     }
 }
 
-// ==== ÍÇáÇÊ ÇáÚÑÖ ====
+// ==== ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ====
 function showEmptyState() {
     const container = document.getElementById('modules-container');
     if (container) {
         container.innerHTML = `
             <div class="empty">
                 <i class="fa-solid fa-inbox" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                <div>áÇ ÊæÌÏ ÊØÈíŞÇÊ ãÊÇÍÉ</div>
-                <small>íÑÌì ÇáÊÍŞŞ ãä ÅÚÏÇÏÇÊ ÇáäÙÇã</small>
+                <div>ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½</div>
+                <small>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</small>
             </div>
         `;
     }
@@ -1529,7 +1175,7 @@ function showErrorState(message) {
             <div class="error">
                 <i class="fa-solid fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
                 <div>? ${message}</div>
-                <small>íÑÌì ÇáãÍÇæáÉ ãÑÉ ÃÎÑì</small>
+                <small>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</small>
             </div>
         `;
     }
@@ -1548,28 +1194,28 @@ async function loadCurrentUser() {
                 credentials: 'include'
             });
             const data = await res.json();
-            span.innerText = data.message || "ÒÇÆÑ";
+            span.innerText = data.message || "ï¿½ï¿½ï¿½ï¿½";
         }
     } catch (error) {
         console.error('Error loading user:', error);
-        span.innerText = "ãÓÊÎÏã";
+        span.innerText = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
     }
 }
 
-// ==== æÙÇÆİ ãÓÇÚÏÉ ÅÖÇİíÉ ====
+// ==== ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ====
 function refreshSidebar() {
-    console.log('?? ÊÍÏíË ÇáÜ Sidebar...');
+    console.log('?? ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Sidebar...');
     const container = document.getElementById('modules-container');
     if (container) {
-        container.innerHTML = '<div class="loading">? ÌÇÑí ÊÍÏíË ÇáÈíÇäÇÊ...</div>';
+        container.innerHTML = '<div class="loading">? ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...</div>';
     }
     loadWorkspaces();
 }
 
-// ÌÚá æÙíİÉ ÇáÊÍÏíË ãÊÇÍÉ globally
+// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ globally
 window.refreshSidebar = refreshSidebar;
 
-// ÅÖÇİÉ event listener ááæÍÉ ÇáãİÇÊíÍ (Ctrl+R áÊÍÏíË ÇáÜ Sidebar)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ event listener ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (Ctrl+R ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Sidebar)
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.key === 'r') {
         e.preventDefault();
@@ -1577,4 +1223,4 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-console.log('? Êã ÊÍãíá Custom Sidebar ÈäÌÇÍ!');
+console.log('? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Custom Sidebar ï¿½ï¿½ï¿½ï¿½ï¿½!');
